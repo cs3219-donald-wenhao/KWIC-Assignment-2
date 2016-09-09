@@ -1,6 +1,6 @@
-package test;
+package test.java.test;
 
-import CS3213.Alphabetizer;
+import main.java.CS3213.Alphabetizer;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

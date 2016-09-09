@@ -1,10 +1,10 @@
-package test;
+package test.java.test;
 
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import CS3213.CircularShift;
+import main.java.CS3213.CircularShift;
 
 import java.util.HashSet;
 

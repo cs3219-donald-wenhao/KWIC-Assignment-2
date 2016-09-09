@@ -1,4 +1,4 @@
-package CS3213;
+package main.java.CS3213;
 
 import java.util.ArrayList;
 import java.util.Arrays;

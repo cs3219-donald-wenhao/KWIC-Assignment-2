@@ -1,4 +1,4 @@
-package sg.KWIC;
+package test.java.sg.KWIC;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

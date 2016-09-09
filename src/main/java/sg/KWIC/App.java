@@ -1,4 +1,4 @@
-package sg.KWIC;
+package main.java.sg.KWIC;
 
 /**
  * Hello world!
