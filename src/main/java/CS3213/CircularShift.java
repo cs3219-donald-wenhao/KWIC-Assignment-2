@@ -12,6 +12,7 @@ public class CircularShift {
     public static String DELIMITER = " ";
     private String _line;
     private WordsToIgnore _wordsToIgnore;
+    private RequiredWords _requiredWords;
 
     /**
      * input should not be null
@@ -21,6 +22,7 @@ public class CircularShift {
         assert(line != null);
         this._line = line.toLowerCase();
         this._wordsToIgnore = WordsToIgnore.getWordsToIgnore();
+        this._requiredWords = RequiredWords.getRequiredWords();
     }
 
     public String[] getCircularShifts() {
@@ -32,12 +34,16 @@ public class CircularShift {
             shifts[i] = this.getShiftedLine(i, words);
         }
 
-        String[] filteredShifts = getShiftsWithoutIgnoredWordLeading(shifts);
-        for (int i=0;i<filteredShifts.length;i++) {
-            filteredShifts[i] = capitalizeWordsNotIgnoredInShift(filteredShifts[i]);
+        String[] ignoreFilteredShifts = getShiftsWithoutIgnoredWordLeading(shifts);
+        for (int i=0;i<ignoreFilteredShifts.length;i++) {
+            ignoreFilteredShifts[i] = capitalizeWordsNotIgnoredInShift(ignoreFilteredShifts[i]);
         }
 
-        return filteredShifts;
+        if (this._requiredWords.hasNoRequiredWords()) {
+        	return ignoreFilteredShifts;
+        } else {
+        	return getShiftsWithRequiredWordLeading(ignoreFilteredShifts);
+        }
     }
 
     private String getShiftedLine(int index, String[] words) {
@@ -94,5 +100,22 @@ public class CircularShift {
         }
 
         return builder.toString();
+    }
+    
+    private String[] getShiftsWithRequiredWordLeading(String[] shifts) {
+        List<String> shiftList = new ArrayList<String>(Arrays.asList(shifts));
+
+        Iterator<String> iter = shiftList.iterator();
+        while (iter.hasNext()) {
+            if (!isShiftStartingWithRequiredWord(iter.next())) {
+                iter.remove();
+            }
+        }
+
+        return shiftList.toArray(new String[shiftList.size()]);
+    }
+
+    private boolean isShiftStartingWithRequiredWord(String line) {
+        return this._requiredWords.isRequiredWord(line.split(DELIMITER)[0]);
     }
 }
