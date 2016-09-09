@@ -21,6 +21,14 @@ public class Main {
             userInput = sc.nextLine();
         }
 
+        System.out.println("Enter required words (terminate input by entering empty line) ");
+        String inputRequiredWord = sc.nextLine();
+        RequiredWords requiredWords = RequiredWords.getRequiredWords();
+        while (!inputRequiredWord.isEmpty()) {
+            requiredWords.addRequiredWord(inputRequiredWord);
+            inputRequiredWord = sc.nextLine();
+        }
+        
         System.out.println("Enter words to ignore (terminate input by entering empty line) ");
         String inputWordToIgnore = sc.nextLine();
         WordsToIgnore wordsToIgnore = WordsToIgnore.getWordsToIgnore();
